@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "slug": "byte-routes",
+    "name": "Byte Routes",
+    "description": "Byte Routes Application",
+    "sdkVersion": "27.0.0",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "primaryColor": "#6FAA43",
+    "icon": "./assets/icons/app.png",
+    "splash": {
+      "backgroundColor": "#6FAA43",
+      "image": "./assets/icons/loading.png",
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
