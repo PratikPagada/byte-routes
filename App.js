@@ -1,22 +1,33 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import styled from 'styled-components';
+import {
+  Text,
+  View,
+  StatusBar,
+  Platform
+} from 'react-native';
+import { Provider, connect } from 'react-redux';
+import styled, { ThemeProvider } from 'styled-components';
+import { theme } from './src/utils/constants';
 
-const ContainerView = styled.View`
+import Store from './src/Store';
+import Navigation from './src/Navigation';
+
+const Root = styled.View`
   flex: 1;
-  background-color: #fff;
-  align-items: center;
-  justify-content: center;
+  background-color: ${props => props.theme.defaultBackground};
 `;
 
 export default class App extends React.Component {
   render() {
     return (
-      <ContainerView>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </ContainerView>
+      <Provider store={Store}>
+        <ThemeProvider theme={theme}>
+          <Root>
+            <StatusBar barStyle='light-content' backgroundColor='transparent' translucent animated/>
+            <Navigation />
+          </Root>
+        </ThemeProvider>
+      </Provider>
     );
   }
 }

@@ -7,13 +7,13 @@
 * The UI should include the date field to be specified by a user to be used for the 'date' field of the API call
 * The UI should include a field to select a driver from the output. By default, no name is selected and routes for all the drivers are shown (separated by driver name)
 
-## API
+**API**
 
 https://api.optimoroute.com/v1/get_routes?key=4dcf3c4119906a2a275d379950b0a7b279RNEMX1ANE&date=2018-06-01
 
 ## Technologies
 
-* React Native
+* React Native (CRNA)
 * React Navigation
 * Redux
 * Styled Components

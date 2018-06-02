@@ -3,8 +3,22 @@ export const colors = {
   SECONDARY_GREEN: '#A2DD6F',
   YELLOW: '#F6D246',
   RED: '#FF8080',
+  PRIMARY_TEXT_COLOR: '#444B52',
+  GREY_LIGHT: '#eeeeee',
 };
 
+export const theme = {
+  defaultBackground: colors.GREY_LIGHT,
+  primaryTextColor: colors.PRIMARY_TEXT_COLOR,
+  primary: colors.PRIMARY_GREEN,
+  secondary: colors.SECONDARY_GREEN,
+  accent: colors.YELLOW,
+};
+
+export const api = 'https://api.optimoroute.com/v1/get_routes?key=4dcf3c4119906a2a275d379950b0a7b279RNEMX1ANE';
+export const defaultDate = '2018-06-01';
+
+/*
 export const byte = {
   routes: [
     {
@@ -78,3 +92,4 @@ export const byte = {
   ],
   success: true
 };
+*/
