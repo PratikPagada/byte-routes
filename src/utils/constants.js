@@ -13,6 +13,7 @@ export const theme = {
   primary: colors.PRIMARY_GREEN,
   secondary: colors.SECONDARY_GREEN,
   accent: colors.YELLOW,
+  error: colors.RED,
 };
 
 export const api = 'https://api.optimoroute.com/v1/get_routes?key=4dcf3c4119906a2a275d379950b0a7b279RNEMX1ANE';

@@ -1,3 +1,5 @@
+import { api } from '../utils/constants';
+
 export const FETCH_ROUTES = 'FETCH_ROUTES';
 export const FETCH_ROUTES_SUCCESS = 'FETCH_ROUTES_SUCCESS';
 export const FETCH_ROUTES_FAILURE = 'FETCH_ROUTES_FAILURE';
@@ -6,13 +8,15 @@ export const SELECT_DRIVER = 'SELECT_DRIVER';
 
 export const SELECT_DATE = 'SELECT_DATE';
 
-export function getRoutes(date) {
+export function fetchRoutes(date) {
   return (dispatch) => {
+    console.log("FETCHIN ROUTES");
     dispatch({type: FETCH_ROUTES});
     fetch(`${api}&date=${date}`)
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson.success) {
+          console.log("FETCHED ROUTES");
           dispatch({
             type: FETCH_ROUTES_SUCCESS,
             payload: {
@@ -20,6 +24,7 @@ export function getRoutes(date) {
             }
           });
         } else {
+          console.log("FETCHED ROUTES FAIL");
           dispatch({
             type: FETCH_ROUTES_FAILURE,
             payload: {

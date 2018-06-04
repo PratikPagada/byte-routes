@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
 import navigation from './navigation';
-import byteroutes from './byteroutes';
+import byte from './byteroutes';
 
 export default combineReducers({
 	navigation,
-	byteroutes,
+	byte,
 });

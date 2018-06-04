@@ -18,9 +18,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
     case FETCH_ROUTES:
-      return {...state, fetchingRoutes: true};
+      return {...state, routes: [], fetchingRoutes: true};
     case FETCH_ROUTES_SUCCESS:
-      return {...state, fetchingRoutes: false, fetchedRoutes: true, routes: action.routes};
+      return {...state, fetchingRoutes: false, fetchedRoutes: true, ...action.payload};
     case FETCH_ROUTES_FAILURE:
       return {...state, fetchingRoutes: false, fetchedRoutes: true, routes: [], error: action.message};
     case SELECT_DATE:
