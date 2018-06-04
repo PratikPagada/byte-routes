@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import { TouchableNativeFeedback } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
+import styled from 'styled-components';
 
 const Wrapper = styled.View`
   position: absolute;
@@ -43,45 +45,61 @@ const CenterContent = styled.View`
 
 const ExpandableContent = styled.View`
 
-`;
+`
 
 const Icon = styled(Ionicons).attrs({
   size: 24,
 })`
-  paddingLeft: 24px;
-  color: ${props => props.theme.primaryTextColor};
+  paddingRight: 24px;
+  color: ${props => props.highlight ? props.theme.primary : props.theme.primaryTextColor};
 `;
 
 class Toolbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    };
-  }
+  onBackPress = () => {
+    this.props.navigation.goBack();
+  };
 
   render() {
+    const {
+      back,
+      title,
+      expand,
+      showTitle,
+      leftContent,
+      rightContent,
+      centerContent,
+    } = this.props;
+
     return (
       <Wrapper>
         <Bar>
           <LeftContent>
-
+            {
+              back &&
+              <TouchableNativeFeedback onPress={this.onBackPress}>
+                <Icon name="md-arrow-back" size={24} />
+              </TouchableNativeFeedback>
+            }
+            {leftContent}
           </LeftContent>
           <CenterContent>
-            <TitleWrapper>
-              ByteRoutes
-            </TitleWrapper>
+            {
+              showTitle &&
+              <TitleWrapper>
+                {title}
+              </TitleWrapper>
+            }
+            {centerContent}
           </CenterContent>
           <RightContent>
-            <Icon name={"md-calendar"}/>
-            <Icon name={"md-search"}/>
+            {rightContent}
           </RightContent>
         </Bar>
         {
-          this.state.open &&
-            <ExpandableContent>
-              {this.props.expandable}
-            </ExpandableContent>
+          expand &&
+          <ExpandableContent>
+            {this.props.expandable}
+          </ExpandableContent>
         }
         {this.props.children}
       </Wrapper>
@@ -89,4 +107,11 @@ class Toolbar extends Component {
   }
 }
 
-export default Toolbar;
+Toolbar.defaultProps = {
+  showTitle: true,
+  title: "ByteRoutes",
+  open: false,
+  back: false,
+};
+
+export default withNavigation(Toolbar);

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { TouchableNativeFeedback } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components';
 
 import Toolbar from '../components/Toolbar';
 import Datebar from '../components/Datebar';
+import DatePicker from '../components/DatePicker';
 import * as ByteActions from '../actions/byteroutes';
 import DriverRoute from '../components/DriverRoute';
 
@@ -41,7 +44,22 @@ const Loading = styled.ActivityIndicator.attrs({
   color: props => props.theme.primary
 })``;
 
+
+const Icon = styled(Ionicons).attrs({
+  size: 24,
+})`
+  marginLeft: 24px;
+  color: ${props => props.highlight ? props.theme.primary : props.theme.primaryTextColor};
+`;
+
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      expandToolbar: false,
+    };
+  }
+
   componentDidMount() {
     this.props.fetchRoutes(this.props.date);
   }
@@ -61,6 +79,22 @@ class Home extends Component {
   _countDistance = (routes = []) => {
     return routes.reduce((totalDist, route) => totalDist + route.distance, 0);
   }
+
+  _onCalendarPress = () => {
+    this.setState({
+      expandToolbar: !this.state.expandToolbar,
+    });
+  };
+
+  _onSearchPress = () => {
+    // navigate to settings
+    this.props.navigation.navigate('Search');
+  };
+
+  _onSettingsPress = () => {
+    // navigate to settings
+    this.props.navigation.navigate('Settings');
+  };
 
   _renderView = () => {
     const {
@@ -84,6 +118,7 @@ class Home extends Component {
       return (
         <Empty>
           <Loading />
+          <Message>Loading Routes</Message>
         </Empty>
       )
     }
@@ -108,13 +143,36 @@ class Home extends Component {
   }
 
   render() {
+    const {
+      expandToolbar,
+    } = this.state;
+
     return (
       <ContainerView>
-        <Toolbar>
+        <Toolbar
+          expand={expandToolbar}
+          expandable={
+            <DatePicker
+              selected={this.props.date}
+            />
+          }
+          rightContent={[
+            <TouchableNativeFeedback key="calendar" onPress={this._onCalendarPress}>
+              <Icon name={"md-calendar"} highlight={expandToolbar}/>
+            </TouchableNativeFeedback>,
+            <TouchableNativeFeedback key="search" onPress={this._onSearchPress}>
+              <Icon name={"md-search"} />
+            </TouchableNativeFeedback>,
+            <TouchableNativeFeedback key="settings" onPress={this._onSettingsPress}>
+              <Icon name={"md-settings"} />
+            </TouchableNativeFeedback>
+          ]}
+        >
           <Datebar
             date={this.props.date}
             stops={this._countStops(this.props.routes)}
             distance={this._countDistance(this.props.routes)}
+            showDistance={false}
           />
         </Toolbar>
         <ContentWrapper>

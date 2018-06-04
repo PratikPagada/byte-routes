@@ -78,14 +78,14 @@ class DateBar extends Component {
         </LeftContent>
         <RightContent>
           {
-            showDistance &&
+            (showDistance) &&
             <Info>
               <Icon name="md-car" />
               <StopText>{distance.toFixed(1)}mi</StopText>
             </Info>
           }
           {
-            showStops &&
+            (showStops) &&
             <Info>
               <Stop name="md-pin" />
               <StopText>{stops}</StopText>  

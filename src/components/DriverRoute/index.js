@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { TouchableNativeFeedback } from 'react-native';
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
+
 import Stop from '../Stop';
 
 const Wrapper = styled.View`
@@ -123,6 +125,7 @@ class DriverRoute extends Component {
 
   _onCardPress = () => {
     // navigate to user detail page
+    this.props.navigation.navigate('Details', { driverName: this.props.route.driverName })
   };
 
   _onDropDownPress = () => {
@@ -147,7 +150,7 @@ class DriverRoute extends Component {
 
     return (
       <Wrapper>
-        <TouchableNativeFeedback onPress={this._onPressButton}>
+        <TouchableNativeFeedback onPress={this._onCardPress}>
           <CardWrapper open={open}>
             <Avatar /*source={avatar || defaultImage}*/ />
             <ContentWrapper>
@@ -157,7 +160,7 @@ class DriverRoute extends Component {
               </TitleWrapper>
               <QuickInfo>
                 <Information>
-                  <Ionicons name="md-pin" size={18}  color={this.props.theme.error} />
+                  <Ionicons name="md-pin" size={18}  color="#FF8080" />
                   <InfoText>
                     {stops.length}
                   </InfoText>
@@ -194,4 +197,4 @@ class DriverRoute extends Component {
   }
 }
 
-export default withTheme(DriverRoute);
+export default withNavigation(DriverRoute);

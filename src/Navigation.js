@@ -4,10 +4,16 @@ import { connect } from 'react-redux';
 import { Constants } from 'expo';
 
 import HomeScreen from './screens/Home';
+import DetailScreen from './screens/Details';
+import SearchScreen from './screens/Search';
+import SettingsScreen from './screens/Settings';
 
 export const AppMainStack = createStackNavigator(
   {
     Home: { screen: HomeScreen },
+    Details: { screen: DetailScreen },
+    Search: { screen: SearchScreen },
+    Settings: { screen: SettingsScreen },
   },
   {
     headerMode: 'none',
