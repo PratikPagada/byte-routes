@@ -12,7 +12,8 @@ export function fetchRoutes(date) {
   return (dispatch) => {
     console.log("FETCHIN ROUTES");
     dispatch({type: FETCH_ROUTES});
-    fetch(`${api}&date=${date}`)
+    dispatch({type: FETCH_ROUTES_SUCCESS});
+    /*fetch(`${api}&date=${date}`)
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson.success) {
@@ -38,6 +39,7 @@ export function fetchRoutes(date) {
           type: FETCH_ROUTES_FAILURE
         });
       });
+    */
   }
 }
 

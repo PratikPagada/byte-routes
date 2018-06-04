@@ -10,9 +10,9 @@ export const AppMainStack = createStackNavigator(
     Home: { screen: HomeScreen },
   },
   {
-    headerTitle: 'Home',
-    headerTitleStyle: {
-      color: '#000',
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
     },
     initialRouteName: 'Home'
   }

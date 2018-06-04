@@ -3,7 +3,7 @@ export const colors = {
   SECONDARY_GREEN: '#A2DD6F',
   YELLOW: '#F6D246',
   RED: '#FF8080',
-  PRIMARY_TEXT_COLOR: '#444B52',
+  PRIMARY_TEXT_COLOR: '#212121', /*#444B52*/
   GREY_LIGHT: '#eeeeee',
 };
 
@@ -19,7 +19,25 @@ export const theme = {
 export const api = 'https://api.optimoroute.com/v1/get_routes?key=4dcf3c4119906a2a275d379950b0a7b279RNEMX1ANE';
 export const defaultDate = '2018-06-01';
 
-/*
+const months = {
+  1: 'Jan',
+  2: 'Feb',
+  3: 'Mar',
+  4: 'Apr',
+  5: 'May',
+  6: 'Jun',
+  7: 'Jul',
+  8: 'Aug',
+  9: 'Sep',
+  10: 'Oct',
+  11: 'Nov',
+  12: 'Dec',
+}
+
+export const monthString = (month) => {
+  return months[parseInt(month)]
+};
+
 export const byte = {
   routes: [
     {
@@ -90,7 +108,210 @@ export const byte = {
       load2: 0,
       load4: 0,
     },
+    {
+      duration: 21,
+      vehicleLabel: null,
+      vehicleRegistration: null,
+      driverSerial: '',
+      distance: 3.606,
+      stops: [
+        {
+          locationName: 'Byte - 101 Glacier Pt - C',
+          scheduledAt: '08:05',
+          longitude: -122.4900207,
+          address: '101 Glacier Point, Suite A, San Rafael, CA 94901',
+          latitude: 37.9501647,
+          stopNumber: 1,
+          orderNo: '',
+          locationNo: '576'
+        },
+        {
+          locationName: 'Byte - Suite N',
+          scheduledAt: '08:15',
+          longitude: -122.499466,
+          address: '3095 Kerner Blvd Suite N, San Rafael, CA 94901',
+          latitude: 37.9563461,
+          stopNumber: 2,
+          orderNo: '',
+          locationNo: '214',
+        },
+      ],
+      driverName: 'Clark Kent',
+      load1: 0,
+      load3: 0,
+      load2: 0,
+      load4: 0,
+    },
+    {
+      duration: 21,
+      vehicleLabel: null,
+      vehicleRegistration: null,
+      driverSerial: '',
+      distance: 3.606,
+      stops: [
+        {
+          locationName: 'Byte - 101 Glacier Pt - C',
+          scheduledAt: '08:05',
+          longitude: -122.4900207,
+          address: '101 Glacier Point, Suite A, San Rafael, CA 94901',
+          latitude: 37.9501647,
+          stopNumber: 1,
+          orderNo: '',
+          locationNo: '576'
+        },
+        {
+          locationName: 'Byte - Suite N',
+          scheduledAt: '08:15',
+          longitude: -122.499466,
+          address: '3095 Kerner Blvd Suite N, San Rafael, CA 94901',
+          latitude: 37.9563461,
+          stopNumber: 2,
+          orderNo: '',
+          locationNo: '214',
+        },
+      ],
+      driverName: 'Elmo Lisa',
+      load1: 0,
+      load3: 0,
+      load2: 0,
+      load4: 0,
+    },
+    {
+      duration: 21,
+      vehicleLabel: null,
+      vehicleRegistration: null,
+      driverSerial: '',
+      distance: 3.606,
+      stops: [
+        {
+          locationName: 'Byte - 101 Glacier Pt - C',
+          scheduledAt: '08:05',
+          longitude: -122.4900207,
+          address: '101 Glacier Point, Suite A, San Rafael, CA 94901',
+          latitude: 37.9501647,
+          stopNumber: 1,
+          orderNo: '',
+          locationNo: '576'
+        },
+        {
+          locationName: 'Byte - Suite N',
+          scheduledAt: '08:15',
+          longitude: -122.499466,
+          address: '3095 Kerner Blvd Suite N, San Rafael, CA 94901',
+          latitude: 37.9563461,
+          stopNumber: 2,
+          orderNo: '',
+          locationNo: '214',
+        },
+      ],
+      driverName: 'Don Clark',
+      load1: 0,
+      load3: 0,
+      load2: 0,
+      load4: 0,
+    },
+    {
+      duration: 21,
+      vehicleLabel: null,
+      vehicleRegistration: null,
+      driverSerial: '',
+      distance: 3.606,
+      stops: [
+        {
+          locationName: 'Byte - 101 Glacier Pt - C',
+          scheduledAt: '08:05',
+          longitude: -122.4900207,
+          address: '101 Glacier Point, Suite A, San Rafael, CA 94901',
+          latitude: 37.9501647,
+          stopNumber: 1,
+          orderNo: '',
+          locationNo: '576'
+        },
+        {
+          locationName: 'Byte - Suite N',
+          scheduledAt: '08:15',
+          longitude: -122.499466,
+          address: '3095 Kerner Blvd Suite N, San Rafael, CA 94901',
+          latitude: 37.9563461,
+          stopNumber: 2,
+          orderNo: '',
+          locationNo: '214',
+        },
+      ],
+      driverName: 'Clark Lisa',
+      load1: 0,
+      load3: 0,
+      load2: 0,
+      load4: 0,
+    },
+    {
+      duration: 21,
+      vehicleLabel: null,
+      vehicleRegistration: null,
+      driverSerial: '',
+      distance: 3.606,
+      stops: [
+        {
+          locationName: 'Byte - 101 Glacier Pt - C',
+          scheduledAt: '08:05',
+          longitude: -122.4900207,
+          address: '101 Glacier Point, Suite A, San Rafael, CA 94901',
+          latitude: 37.9501647,
+          stopNumber: 1,
+          orderNo: '',
+          locationNo: '576'
+        },
+        {
+          locationName: 'Byte - Suite N',
+          scheduledAt: '08:15',
+          longitude: -122.499466,
+          address: '3095 Kerner Blvd Suite N, San Rafael, CA 94901',
+          latitude: 37.9563461,
+          stopNumber: 2,
+          orderNo: '',
+          locationNo: '214',
+        },
+      ],
+      driverName: 'A Clark',
+      load1: 0,
+      load3: 0,
+      load2: 0,
+      load4: 0,
+    },
+    {
+      duration: 21,
+      vehicleLabel: null,
+      vehicleRegistration: null,
+      driverSerial: '',
+      distance: 3.606,
+      stops: [
+        {
+          locationName: 'Byte - 101 Glacier Pt - C',
+          scheduledAt: '08:05',
+          longitude: -122.4900207,
+          address: '101 Glacier Point, Suite A, San Rafael, CA 94901',
+          latitude: 37.9501647,
+          stopNumber: 1,
+          orderNo: '',
+          locationNo: '576'
+        },
+        {
+          locationName: 'Byte - Suite N',
+          scheduledAt: '08:15',
+          longitude: -122.499466,
+          address: '3095 Kerner Blvd Suite N, San Rafael, CA 94901',
+          latitude: 37.9563461,
+          stopNumber: 2,
+          orderNo: '',
+          locationNo: '214',
+        },
+      ],
+      driverName: 'L Clark',
+      load1: 0,
+      load3: 0,
+      load2: 0,
+      load4: 0,
+    },
   ],
   success: true
 };
-*/

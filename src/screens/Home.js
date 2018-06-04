@@ -3,12 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 
+import Toolbar from '../components/Toolbar';
+import Datebar from '../components/Datebar';
 import * as ByteActions from '../actions/byteroutes';
 import DriverRoute from '../components/DriverRoute';
 
 const ContainerView = styled.View`
   flex: 1;
 `;
+
+const ContentWrapper = styled.View`
+  flex: 1;
+  paddingTop: 122px;
+`;
+
+const ScrollView = styled.ScrollView``;
 
 const Empty = styled.View`
   flex: 1;
@@ -23,6 +32,10 @@ const Circle = styled.View`
   background-color: ${props => props.error ? props.theme.error : '#BDBDBD'};
 `;
 
+const Message = styled.Text`
+
+`;
+
 const Loading = styled.ActivityIndicator.attrs({
   size: 'large',
   color: props => props.theme.primary
@@ -33,15 +46,23 @@ class Home extends Component {
     this.props.fetchRoutes(this.props.date);
   }
 
-  generateRoutes = (routes = []) => {
-    return routes.map((route) => {
+  _generateRoutes = (routes = []) => {
+    return routes.map((route, indx) => {
       return ( 
-        <DriverRoute key={route.driverSerial || route.driverName} route={route}/>
+        <DriverRoute key={route.driverSerial || route.driverName} route={route} />
       );
     });
   };
 
-  render() {
+  _countStops = (routes = []) => {
+    return routes.reduce((totalStops, route) => totalStops + route.stops.length, 0);
+  }
+
+  _countDistance = (routes = []) => {
+    return routes.reduce((totalDist, route) => totalDist + route.distance, 0);
+  }
+
+  _renderView = () => {
     const {
       routes,
       fetchedRoutes,
@@ -49,13 +70,11 @@ class Home extends Component {
       error
     } = this.props;
 
-    console.log(routes);
-
     if (error) {
       return (
         <Empty>
           <Circle error>
-            {error}
+            <Message>{error}</Message>
           </Circle>
         </Empty>
       );
@@ -73,17 +92,34 @@ class Home extends Component {
       return (
         <Empty>
           <Circle>
-            No routes for today
+            <Message>No routes for today</Message>
           </Circle>
         </Empty>
       );
     }
 
     return (
-      <ContainerView>
+      <ScrollView>
         {
-          this.generateRoutes(routes)
+          this._generateRoutes(routes)
         }
+      </ScrollView>
+    );
+  }
+
+  render() {
+    return (
+      <ContainerView>
+        <Toolbar>
+          <Datebar
+            date={this.props.date}
+            stops={this._countStops(this.props.routes)}
+            distance={this._countDistance(this.props.routes)}
+          />
+        </Toolbar>
+        <ContentWrapper>
+          {this._renderView()}
+        </ContentWrapper>
       </ContainerView>
     );
   }
