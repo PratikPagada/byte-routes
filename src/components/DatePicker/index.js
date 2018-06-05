@@ -17,7 +17,7 @@ class DatePicker extends Component {
   render(){
     return (
       <Wrapper>
-        <Text>DatePicker</Text>
+        <Text>Soon to be Awesome Date Picker</Text>
       </Wrapper>
     );
   }

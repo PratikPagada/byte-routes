@@ -16,6 +16,7 @@ export const AppMainStack = createStackNavigator(
     Settings: { screen: SettingsScreen },
   },
   {
+    // custom toolbar to make a custom dropdown date picker
     headerMode: 'none',
     navigationOptions: {
         headerVisible: false,

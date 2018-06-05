@@ -11,3 +11,5 @@ export const formatDate = (dateStr) => {
   let now = new Date().getFullYear();
   return `${monthString(month)} ${parseInt(day)}${now !== parseInt(year) ? `, ${year}` : ''}`;
 };
+
+export const padNumber = (number) => `${number > 10 ? '' : '0'}${number}`;

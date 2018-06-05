@@ -12,7 +12,11 @@
       "image": "./assets/icons/loading.png"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.crispcrafts.byteroutes"
+    },
+    "android": {
+      "package": "com.crispcrafts.byteroutes"
     }
   }
 }

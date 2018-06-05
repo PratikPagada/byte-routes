@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TouchableNativeFeedback } from 'react-native';
+import { TouchableNativeFeedback, DatePickerAndroid } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components';
 
@@ -18,6 +18,7 @@ import {
   Circle,
   Message,
 } from '../components';
+import { padNumber } from '../utils';
 
 const ContentWrapper = styled.View`
   flex: 1;
@@ -40,17 +41,20 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    // Fetch Routes for current date 
     this.props.fetchRoutes(this.props.date);
   }
   
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (this.props !== undefined && this.props.date !== nextProps.date) {
-      this.props.fetchRoutes(props.date);
+  componentDidUpdate(prevProps){
+    if (prevProps.date !== this.props.date) {
+      this.props.fetchRoutes(this.props.date);
     }
-
-    // Return null to indicate no change to state.
-    return null;
   }
+
+  handleDateChange = (year, month, day) => {
+    // format to -> 2018-06-01
+    this.props.changeDate(`${year}-${padNumber(month)}-${padNumber(day)}`);
+  };
 
   _generateRoutes = (routes = []) => {
     return routes.map((route, indx) => {
@@ -68,10 +72,34 @@ class Home extends Component {
     return routes.reduce((totalDist, route) => totalDist + route.distance, 0);
   }
 
+  _openDefaultCalendar = async () => {
+    try {
+      const selected = this.props.date;
+      let current = new Date();
+      if (selected) {
+        const date = selected.split('-');
+        let year = parseInt(date[0]), month = parseInt(date[1]), day = parseInt(date[2]);
+        current = new Date(year, month, day);
+      }
+      const {action, year, month, day} = await DatePickerAndroid.open({
+        // Use `new Date()` for current date.
+        // May 25 2020. Month 0 is January.
+        date: current,
+      });
+      if (action !== DatePickerAndroid.dismissedAction) {
+        // Selected year, month (0-11), day
+        this.handleDateChange(year, month, day);
+      }
+    } catch ({code, message}) {
+      console.warn('Cannot open date picker', message);
+    }
+  };
+
   _onCalendarPress = () => {
-    this.setState({
+    /*this.setState({
       expandToolbar: !this.state.expandToolbar,
-    });
+    });*/
+    this._openDefaultCalendar();
   };
 
   _onSearchPress = () => {
@@ -142,6 +170,7 @@ class Home extends Component {
           expandable={
             <DatePicker
               selected={this.props.date}
+              onDateChange={this.handleDateChange}
             />
           }
           rightContent={[

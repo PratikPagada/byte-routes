@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_ROUTES_FAILURE:
       return {...state, fetchingRoutes: false, fetchedRoutes: true, routes: [], error: action.message};
     case SELECT_DATE:
-      return {...state, date: action.date};
+      return {...state, ...action.payload};
     case SELECT_DRIVER:
       return {...state, driver: action.driver};
 	  default:
