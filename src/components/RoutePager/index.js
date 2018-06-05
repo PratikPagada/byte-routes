@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { formatTime } from '../../utils';
 import {
   MIcon,
   Icon,
@@ -48,7 +49,7 @@ class RoutePager extends Component {
             <ContentSection>
               <MIcon name="clock" size={24} />
               <Text>
-                {duration}min
+                {formatTime(duration)}
               </Text>
             </ContentSection>
           </ContentCenter>

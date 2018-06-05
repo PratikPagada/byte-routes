@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, ToolbarAndroid, Dimensions } from 'react-native';
+import { View, ToolbarAndroid, Dimensions, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import { MapView } from 'expo';
@@ -142,7 +142,9 @@ class Details extends Component {
             route.stops &&
             <MapContainer key="map">
               <MapView
-                style={{ flex: 1 }}
+                style={{
+                  ...StyleSheet.absoluteFillObject,
+                }}
                 initialRegion={{
                   latitude: route.stops[0].latitude,
                   longitude: route.stops[0].longitude,

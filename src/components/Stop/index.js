@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { TouchableNativeFeedback } from 'react-native';
+import { TouchableNativeFeedback, Linking, Platform } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import RouteLine from '../RouteLine';
 import {
@@ -18,6 +18,16 @@ import {
 
 class Stop extends Component {
   
+  _openStop = () => {
+    const { stop } = this.props;
+    const scheme = Platform.OS === 'ios' ? 'maps:0,0?q=' : 'geo:0,0?q=';
+    const latLng = `${stop.latitude},${stop.longitude}`;
+    const label = stop.locationName;
+    const url = Platform.OS === 'ios' ? `${scheme}${label}@${latLng}` : `${scheme}${latLng}(${label})`;
+
+    Linking.openURL(url); 
+  }
+
   render() {
     const {
       stop,
@@ -34,7 +44,7 @@ class Stop extends Component {
     } = stop;
 
     return (
-      <TouchableNativeFeedback>
+      <TouchableNativeFeedback onPress={this._openStop}>
         <Wrapper minimal={minimal}>
           {
             !minimal &&

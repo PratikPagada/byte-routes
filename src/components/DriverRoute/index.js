@@ -4,6 +4,7 @@ import { TouchableNativeFeedback } from 'react-native';
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { Avatar } from '../index';
+import { formatTime } from '../../utils';
 import {
   TitleWrapper,
   StopWrapper,
@@ -49,7 +50,7 @@ class DriverRoute extends Component {
 
   formatDuration = (duration) => {
     // temporary format - should be [X]hrs[X]min
-    return `${duration}min`;
+    return formatTime(duration);
   };
 
   _onCardPress = () => {

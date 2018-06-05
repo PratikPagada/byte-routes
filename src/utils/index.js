@@ -14,6 +14,13 @@ export const formatDate = (dateStr) => {
   return `${monthString(month)} ${parseInt(day)}${now !== parseInt(year) ? `, ${year}` : ''}`;
 };
 
+// Return a formatted time string 101 -> to 1hr41min
+export const formatTime = (time) => {
+  minutes = time % 60;
+  hours = Math.floor(time / 60)
+  return `${hours > 0 ? `${hours}hr` : ''}${minutes > 0 ? `${minutes}min` : ''}`;
+};
+
 // returns a javascript date object from year-month-day format
 export const getDate = (dateStr) => {
   let date = dateStr.split('-');
