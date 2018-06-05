@@ -4,19 +4,16 @@ import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 
 import Toolbar from '../components/Toolbar';
-
-const ContainerView = styled.View`
-  flex: 1;
-`;
+import {
+  Wrapper,
+  ScrollView,
+} from '../components';
 
 const ContentWrapper = styled.View`
   flex: 1;
   paddingTop: 80px;
 `;
 
-const ScrollView = styled.ScrollView`
-
-`;
 
 class Settings extends Component {
   _renderView = () => {
@@ -29,7 +26,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <ContainerView>
+      <Wrapper>
         <Toolbar
           title="Settings"
           back
@@ -38,7 +35,7 @@ class Settings extends Component {
         <ContentWrapper>
           {this._renderView()}
         </ContentWrapper>
-      </ContainerView>
+      </Wrapper>
     );
   }
 }

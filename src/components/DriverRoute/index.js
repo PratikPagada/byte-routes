@@ -3,18 +3,14 @@ import styled, { withTheme } from 'styled-components';
 import { TouchableNativeFeedback } from 'react-native';
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
+import {
+  Avatar
+} from '../index';
 
 import Stop from '../Stop';
 
 const Wrapper = styled.View`
   width: 100%;
-`;
-
-const Avatar = styled.View`
-  borderRadius: 24px;
-  backgroundColor: #eee;
-  width: 48px;
-  height: 48px;
 `;
 
 const ContentWrapper = styled.View`
@@ -99,10 +95,8 @@ class DriverRoute extends Component {
   }
 
   generateStops = (stops) => {
-    return stops.map((stop) => {
-      return (
-        <Stop key={stop.locationNo} stop={stop}/>
-      );
+    return stops.map((stop, indx, stops) => {
+      return <Stop key={stop.stopNumber} stop={stop} last={indx === stops.length-1} minimal/>
     });
   };
 
@@ -162,7 +156,7 @@ class DriverRoute extends Component {
                 <Information>
                   <Ionicons name="md-pin" size={18}  color="#FF8080" />
                   <InfoText>
-                    {stops.length}
+                    {stops.length} stops
                   </InfoText>
                 </Information>
                 <Information>

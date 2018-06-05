@@ -10,40 +10,19 @@ import Datebar from '../components/Datebar';
 import DatePicker from '../components/DatePicker';
 import * as ByteActions from '../actions/byteroutes';
 import DriverRoute from '../components/DriverRoute';
-
-const ContainerView = styled.View`
-  flex: 1;
-`;
+import {
+  Wrapper,
+  ScrollView,
+  LoadingIndicator,
+  Empty,
+  Circle,
+  Message,
+} from '../components';
 
 const ContentWrapper = styled.View`
   flex: 1;
   paddingTop: 122px;
 `;
-
-const ScrollView = styled.ScrollView``;
-
-const Empty = styled.View`
-  flex: 1;
-  justifyContent: center;
-  alignItems: center;
-`;
-
-const Circle = styled.View`
-  max-height: 200px;
-  max-width: 200px;
-  border-radius: 100px;
-  background-color: ${props => props.error ? props.theme.error : '#BDBDBD'};
-`;
-
-const Message = styled.Text`
-
-`;
-
-const Loading = styled.ActivityIndicator.attrs({
-  size: 'large',
-  color: props => props.theme.primary
-})``;
-
 
 const Icon = styled(Ionicons).attrs({
   size: 24,
@@ -62,6 +41,15 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.fetchRoutes(this.props.date);
+  }
+  
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (this.props !== undefined && this.props.date !== nextProps.date) {
+      this.props.fetchRoutes(props.date);
+    }
+
+    // Return null to indicate no change to state.
+    return null;
   }
 
   _generateRoutes = (routes = []) => {
@@ -117,7 +105,7 @@ class Home extends Component {
     if (!fetchedRoutes || fetchingRoutes) {
       return (
         <Empty>
-          <Loading />
+          <LoadingIndicator />
           <Message>Loading Routes</Message>
         </Empty>
       )
@@ -148,7 +136,7 @@ class Home extends Component {
     } = this.state;
 
     return (
-      <ContainerView>
+      <Wrapper>
         <Toolbar
           expand={expandToolbar}
           expandable={
@@ -178,10 +166,14 @@ class Home extends Component {
         <ContentWrapper>
           {this._renderView()}
         </ContentWrapper>
-      </ContainerView>
+      </Wrapper>
     );
   }
 }
+
+Home.defaultProps = {
+  date: '',
+};
 
 function mapStateToProps({byte}) {
   return {

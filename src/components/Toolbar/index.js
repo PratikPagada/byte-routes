@@ -21,6 +21,7 @@ const TitleWrapper = styled.Text`
   color: ${props => props.theme.primaryTextColor};
   fontSize: 20px;
   textAlign: left;
+  paddingLeft: 8px;
 `;
 
 const Bar = styled.View`
@@ -31,7 +32,8 @@ const Bar = styled.View`
 `;
 
 const LeftContent = styled.View`
-
+  display: flex;
+  flex-direction: row;
 `;
 
 const RightContent = styled.View`
@@ -50,8 +52,8 @@ const ExpandableContent = styled.View`
 const Icon = styled(Ionicons).attrs({
   size: 24,
 })`
-  paddingRight: 24px;
   color: ${props => props.highlight ? props.theme.primary : props.theme.primaryTextColor};
+  paddingRight: 16px;
 `;
 
 class Toolbar extends Component {

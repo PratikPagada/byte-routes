@@ -3,6 +3,7 @@ import styled, { withTheme } from 'styled-components';
 import { Ionicons } from '@expo/vector-icons';
 
 import { monthString } from '../../utils/constants';
+import { formatDate } from '../../utils';
 
 const Wrapper = styled.View`
   backgroundColor: #F5F5F5;
@@ -54,13 +55,6 @@ const Info = styled.View`
 `;
 
 class DateBar extends Component {
-  _formatDate = (dateStr) => {
-    // 2018-06-01 -> Jun 1
-    let date = dateStr.split('-');
-    let year = date[0], month = date[1], day = date[2];
-    let now = new Date().getFullYear();
-    return `${monthString(month)} ${parseInt(day)}${now !== parseInt(year) ? `, ${year}` : ''}`;
-  };
 
   render() {
     const {
@@ -74,7 +68,7 @@ class DateBar extends Component {
     return (
       <Wrapper>
         <LeftContent>
-          <DateText>{this._formatDate(date)}</DateText>
+          <DateText>{formatDate(date)}</DateText>
         </LeftContent>
         <RightContent>
           {

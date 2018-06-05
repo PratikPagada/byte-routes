@@ -12,8 +12,7 @@ export function fetchRoutes(date) {
   return (dispatch) => {
     console.log("FETCHIN ROUTES");
     dispatch({type: FETCH_ROUTES});
-    dispatch({type: FETCH_ROUTES_SUCCESS});
-    /*fetch(`${api}&date=${date}`)
+    fetch(`${api}&date=${date}`)
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson.success) {
@@ -39,12 +38,11 @@ export function fetchRoutes(date) {
           type: FETCH_ROUTES_FAILURE
         });
       });
-    */
   }
 }
 
 // this should use a unique driver serial number or id instead of a name
-export function selectDriver(driverName) {
+export function changeDriver(driverName) {
   return (dispatch) => {
     dispatch({
       type: SELECT_DRIVER,
@@ -53,7 +51,7 @@ export function selectDriver(driverName) {
   }
 }
 
-export function selectDate(selectedDate) {
+export function changeDate(selectedDate) {
   return (dispatch) => {
     dispatch({
       type: SELECT_DATE,

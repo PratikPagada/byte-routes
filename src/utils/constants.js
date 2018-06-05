@@ -19,7 +19,7 @@ export const theme = {
 export const api = 'https://api.optimoroute.com/v1/get_routes?key=4dcf3c4119906a2a275d379950b0a7b279RNEMX1ANE';
 export const defaultDate = '2018-06-01';
 
-const months = {
+export const months = {
   1: 'Jan',
   2: 'Feb',
   3: 'Mar',
@@ -33,10 +33,6 @@ const months = {
   11: 'Nov',
   12: 'Dec',
 }
-
-export const monthString = (month) => {
-  return months[parseInt(month)]
-};
 
 export const byte = {
   routes: [

@@ -6,39 +6,54 @@ const Wrapper = styled.View`
 `;
 
 const Line = styled.View`
-  flex: 1;
-  width: 18px;
+  flex: ${props => props.last ? 0 : 1};
+  width: ${props => props.minimal ? '18px' : '24px'};
   margin: 0 auto;
   background-color: ${props => props.theme.primary};
-  justifyContent: center;
+  justifyContent: flex-start;
   alignItems: center;
+  paddingTop: 16px;
+  borderBottomRightRadius: ${props => props.last ? (props.minimal ? 9 : 12) : 0}px;
+  borderBottomLeftRadius: ${props => props.last ? (props.minimal ? 9 : 12) : 0}px;
 `;
 
 const Dot = styled.View`
-  height: 12px;
-  width: 12px;
-  border-radius: 6px;
-  backgroundColor: rgba(255,255,255,0.5);
+  height: ${props => props.minimal ? '12px' : '18px'};
+  width: ${props => props.minimal ? '12px' : '18px'};
+  border-radius: ${props => props.minimal ? '6px' : '9px'};
+  backgroundColor: rgba(255,255,255,0.6);
+  margin: 2px;
 `;
 
 const DotText = styled.Text`
   color: ${props => props.theme.primary};
   textAlign: center;
-  fontSize: 8px;
+  fontSize: 12px;
+  flex: 1;
 `;
 
 class RouteLine extends PureComponent {
   render() {
+    const { minimal, last } = this.props;
     return (
       <Wrapper>
-        <Line>
+        <Line last={last}>
           <Dot>
-            <DotText>{this.props.children}</DotText>
+            <DotText>
+            {
+              !minimal &&
+              this.props.children
+            }
+            </DotText>
           </Dot>
         </Line>
       </Wrapper>
     );
   }
 }
+
+RouteLine.defaultProps = {
+  minimal: false,
+};
 
 export default RouteLine;
