@@ -9,11 +9,14 @@
     "primaryColor": "#6FAA43",
     "icon": "./assets/icons/app.png",
     "splash": {
-      "backgroundColor": "#6FAA43",
-      "image": "./assets/icons/loading.png",
+      "image": "./assets/icons/loading.png"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.crispcrafts.byteroutes"
+    },
+    "android": {
+      "package": "com.crispcrafts.byteroutes"
     }
   }
 }

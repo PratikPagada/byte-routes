@@ -7,19 +7,54 @@
 * The UI should include the date field to be specified by a user to be used for the 'date' field of the API call
 * The UI should include a field to select a driver from the output. By default, no name is selected and routes for all the drivers are shown (separated by driver name)
 
-## API
+**API**
 
 https://api.optimoroute.com/v1/get_routes?key=4dcf3c4119906a2a275d379950b0a7b279RNEMX1ANE&date=2018-06-01
 
 ## Technologies
 
-* React Native
+* React Native (CRNA - Expo)
 * React Navigation
 * Redux
-* Styled Components
-* ESLint & Prettier
+* Styled Components 🔥
+
+## Disclaimer
+
+All of this has only been tested on Android since I don't have access to a Mac. There will be some styling issues (eg. view shadows because android uses elevation property whereas IOS uses shadowOffset, shadowColor etc...) and other platform specific things that I might not have caught.
+
+## Screenshots
+
+![Home](./assets/images/home.png "Home Screen")
+
+> shows list of routes separated by name
+> * shows start time (first scheduled stop)
+> * shows number of stops
+> * shows total distance
+> * shows total duration
+
+![Home1](./assets/images/home1.png "Home Screen Expanded")
+
+> shows list of stops for each individual route in a dropdown quick view
+
+![Details](./assets/images/details.png "Detail Screen")
+
+> shows stop details for each route when selected
+
+![Search](./assets/images/search.png "Search Screen")
+
+> Routes are searchable by driver name or serial number for currently selected date
+
+![Date](./assets/images/datepicker.png "DatePicker Screen")
+
+> In the process of making a custom date picker to page back and forth in the calendar dropdown from the toolbar
+
+![Date](./assets/images/defaultdatepicker.png "Default DatePicker Screen")
+
+> For now the default date picker is functional :)
 
 <hr />
+
+## Default React-Native ReadME that applies to this project
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
