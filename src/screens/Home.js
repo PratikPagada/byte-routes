@@ -79,7 +79,7 @@ class Home extends Component {
       if (selected) {
         const date = selected.split('-');
         let year = parseInt(date[0]), month = parseInt(date[1]), day = parseInt(date[2]);
-        current = new Date(year, month, day);
+        current = new Date(year, month-1, day);
       }
       const {action, year, month, day} = await DatePickerAndroid.open({
         // Use `new Date()` for current date.
@@ -88,7 +88,7 @@ class Home extends Component {
       });
       if (action !== DatePickerAndroid.dismissedAction) {
         // Selected year, month (0-11), day
-        this.handleDateChange(year, month, day);
+        this.handleDateChange(year, month + 1, day);
       }
     } catch ({code, message}) {
       console.warn('Cannot open date picker', message);

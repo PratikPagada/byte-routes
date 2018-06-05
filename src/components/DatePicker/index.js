@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
-const Wrapper = styled.View`
-  height: 300px;
-  display: flex;
-  justifyContent: center;
-  alignItems: center;
-  alignContent: center;
-`;
-
-const Text = styled.Text`
-
-`;
+import {
+  Wrapper,
+  Text,
+} from './components';
 
 class DatePicker extends Component {
   render(){

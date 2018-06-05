@@ -1,60 +1,23 @@
 import React, { Component } from 'react';
-import { TouchableNativeFeedback } from 'react-native';
-import styled from 'styled-components';
-import { MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-
-const Wrapper = styled.View`
-  display: flex;
-  flex-direction: row;
-  alignItems: center;
-  padding: 16px;
-  height: 72px;
-  backgroundColor: #fff;
-  elevation: 2;
-`;
-
-const ContentCenter = styled.View`
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 0px 16px;
-`;
-
-const ContentSection = styled.View`
-  display: flex;
-  alignContent: center;
-  alignItems: center;
-  justifyContent: center;
-  flex-direction: row;
-`;
-
-const Text = styled.Text`
-  font-size: 18px;
-`;
-
-const Icon = styled(Ionicons).attrs({
-  size: 24,
-})`
-  color: ${props => (props.color || props.theme.primaryTextColor)};
-  paddingRight: 8px;
-`;
-
-const MIcon = styled(MaterialCommunityIcons).attrs({
-  size: 24,
-})`
-  color: ${props => (props.color || props.theme.primaryTextColor)};
-  paddingRight: 8px;
-`;
+import { TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import {
+  MIcon,
+  Icon,
+  Text,
+  ContentSection,
+  ContentCenter,
+  Wrapper,
+} from './components';
 
 class RoutePager extends Component {
 
   _onRightPress = () => {
-
+    this.props.pressedArrow(true);
   };
 
   _onLeftPress = () => {
-    
+    this.props.pressedArrow(false);
   };
 
   render() {
@@ -66,7 +29,7 @@ class RoutePager extends Component {
     } = this.props;
 
     return (
-      <TouchableNativeFeedback onPress={onPress}>
+      <TouchableWithoutFeedback onPress={onPress}>
         <Wrapper>
           <TouchableNativeFeedback onPress={this._onLeftPress}>
             <MaterialIcons name="keyboard-arrow-left" size={24} />
@@ -93,13 +56,9 @@ class RoutePager extends Component {
             <MaterialIcons name="keyboard-arrow-right" size={24}/>
           </TouchableNativeFeedback>
         </Wrapper>
-      </TouchableNativeFeedback>
+      </TouchableWithoutFeedback>
     );
   }
 }
-/**
- * 
-        
- */
 
 export default RoutePager;

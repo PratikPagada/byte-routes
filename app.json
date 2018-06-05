@@ -16,7 +16,12 @@
       "bundleIdentifier": "com.crispcrafts.byteroutes"
     },
     "android": {
-      "package": "com.crispcrafts.byteroutes"
+      "package": "com.crispcrafts.byteroutes",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCTuc55JNtvqqWkxiFAPDwQI2QSgkOYOIA"
+        }
+      }
     }
   }
 }

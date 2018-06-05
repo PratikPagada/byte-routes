@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, ToolbarAndroid } from 'react-native';
+import { View, ToolbarAndroid, Dimensions } from 'react-native';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import { MapView } from 'expo';
 // import MapViewDirections from 'react-native-maps-directions';
 
-import { fetchRoutes } from '../actions/byteroutes';
+import { fetchRoutes, changeDate } from '../actions/byteroutes';
 import Toolbar from '../components/Toolbar';
 import Datebar from '../components/Datebar';
 import Stop from '../components/Stop';
 import RoutePager from '../components/RoutePager';
+import { getDate, padNumber } from '../utils';
 import {
   Wrapper,
   ScrollView,
@@ -28,11 +29,12 @@ const ContentWrapper = styled.View`
 
 const Content = styled.View`
   flex: 1;
+  min-height: 400px;
 `;
 
 const MapContainer = styled.View`
-  height: 300px;
   backgroundColor: #f2f2f2;
+  height: 350px;
 `;
 
 class Details extends Component {
@@ -44,13 +46,22 @@ class Details extends Component {
     };
   }
 
-  handleDateChange(right=true) {
-    if (right) {
-      // add one to current date
-    } else {
-      // go back one day
-    }
-  }
+  _changeDate = (year, month, day) => {
+    this.props.changeDate(`${year}-${padNumber(month)}-${padNumber(day)}`);
+  };
+
+  handleDateChange = (right) => {
+    // get current date object
+    let next = getDate(this.props.date);
+    // add or subtract one day depending on whether
+    // the right or left arrow was pressed in the route pager
+    console.log(next);
+    next.setDate(next.getDate() + (right ? 1 : -1));
+    console.log(next);
+
+    // change the date
+    this._changeDate(next.getFullYear(), next.getMonth() + 1, next.getDate());
+  };
 
   handlePagerPress = () => {
     
@@ -124,46 +135,57 @@ class Details extends Component {
       )
     }
 
-    if (fetchedRoutes && route) {
-      return ([
-        <MapContainer key="map">
-          <MapView
-            style={{ flex: 1 }}
-            initialRegion={{
-              latitude: route.stops[0].latitude,
-              longitude: route.stops[0].longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          >
-            {this._getMarkers(route)}
-          </MapView>
-        </MapContainer>,
-        <ScrollView key="info">
-          <RoutePager
-            stops={(stops ? stops.length : 0)}
-            duration={duration}
-            distance={distance}
-            onPress={this.handlePagerPress}
-            dateChange={this.handleDateChange}
-          />
-          {
-            this._generateStops(route)
-          }
-        </ScrollView>
-      ]);
-    }
-
-    if (fetchedRoutes && (routes.length === 0)) {
+    if (fetchedRoutes) {
       return (
-        <Empty>
-          <Circle>
-            <Message>No route for today</Message>
-          </Circle>
-        </Empty>
+        <ScrollView key="info">
+          {
+            route.stops &&
+            <MapContainer key="map">
+              <MapView
+                style={{ flex: 1 }}
+                initialRegion={{
+                  latitude: route.stops[0].latitude,
+                  longitude: route.stops[0].longitude,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}
+              >
+                {this._getMarkers(route)}
+              </MapView>
+            </MapContainer>
+          }
+          <Content>
+            <RoutePager
+              stops={(stops ? stops.length : 0)}
+              duration={(duration || 0)}
+              distance={(distance || 0)}
+              onPress={this.handlePagerPress}
+              pressedArrow={this.handleDateChange}
+            />
+            {
+              route.stops &&
+              this._generateStops(route)
+            }
+            {
+              !route.stops &&
+                <Empty>
+                  <Circle>
+                    <Message>No route for today</Message>
+                  </Circle>
+                </Empty>
+            }
+          </Content>
+        </ScrollView>
       );
     }
-
+    
+    return (
+      <Empty>
+        <Circle>
+          <Message>No route for today</Message>
+        </Circle>
+      </Empty>
+    );
   }
   
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -176,8 +198,6 @@ class Details extends Component {
       let driverRoute = nextProps.routes.filter((route) => {
         return route.driverName === prevState.name
       });
-
-      console.log(driverRoute);
 
       if (driverRoute.length > 0) {
         return {
@@ -239,7 +259,8 @@ function mapStateToProps({byte}) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchRoutes
+    fetchRoutes,
+    changeDate,
   }, dispatch);
 }
 

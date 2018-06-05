@@ -1,3 +1,10 @@
+/**
+ * App Navigation
+ * HomeScreen: Lists all routes for selected date
+ * DetailScreen: Lists all the stops in more detail for selected route
+ * SearchScreen: Search for driver in routes
+ * SettingsScreen: Show app settings
+ */
 import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -16,19 +23,22 @@ export const AppMainStack = createStackNavigator(
     Settings: { screen: SettingsScreen },
   },
   {
-    // custom toolbar to make a custom dropdown date picker
+    // remove default header to allow for a
+    // custom navbar to make an expandable date picker
+    // and date bar below the navbar
     headerMode: 'none',
     navigationOptions: {
         headerVisible: false,
     },
+    // start on the home screen
     initialRouteName: 'Home'
   }
 );
 
 class AppNavigator extends Component {
   render() {
-    /*
-    // if not auth return login view
+    /* TODO: If we were to implement authentication
+    // if not authenticated return login view
     if (!this.props.user.isAuth) {
       return <LoginView />;
     }
