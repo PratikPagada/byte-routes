@@ -4,9 +4,7 @@ export const FETCH_ROUTES = 'FETCH_ROUTES';
 export const FETCH_ROUTES_SUCCESS = 'FETCH_ROUTES_SUCCESS';
 export const FETCH_ROUTES_FAILURE = 'FETCH_ROUTES_FAILURE';
 
-export const SELECT_DRIVER = 'SELECT_DRIVER';
-
-export const SELECT_DATE = 'SELECT_DATE';
+export const CHANGE_DATE = 'CHANGE_DATE';
 
 export function fetchRoutes(date) {
   return (dispatch) => {
@@ -41,20 +39,10 @@ export function fetchRoutes(date) {
   }
 }
 
-// this should use a unique driver serial number or id instead of a name
-export function changeDriver(driverName) {
-  return (dispatch) => {
-    dispatch({
-      type: SELECT_DRIVER,
-      payload: { driver: driverName }
-    });
-  }
-}
-
 export function changeDate(selectedDate) {
   return (dispatch) => {
     dispatch({
-      type: SELECT_DATE,
+      type: CHANGE_DATE,
       payload: {
         date: selectedDate,
       }
