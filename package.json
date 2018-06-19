@@ -3,19 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-plugin-module-resolver": "^3.1.1",
     "eslint-config-prettier": "^2.9.0",
     "jest-expo": "~27.0.0",
     "prettier": "^1.13.4",
     "react-native-scripts": "1.14.0",
+    "react-scripts": "^1.1.4",
     "react-test-renderer": "16.3.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
+    "start-web": "react-scripts start",
+    "build-web": "react-scripts build",
+    "test-web": "react-scripts test --env=jsdom",
+    "eject-web": "react-scripts eject",
+    "start-native": "react-native-scripts start",
+    "eject-native": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test-native": "jest",
+    "test": "npm run test-web && npm test-native"
   },
   "jest": {
     "preset": "jest-expo"
@@ -23,9 +30,11 @@
   "dependencies": {
     "expo": "^27.0.1",
     "react": "16.3.1",
+    "react-dom": "^16.4.1",
     "react-native": "~0.55.2",
     "react-native-calendars": "^1.19.3",
     "react-native-maps-directions": "^1.6.0",
+    "react-native-web": "^0.8.4",
     "react-navigation": "^2.0.4",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",

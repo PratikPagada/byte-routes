@@ -197,7 +197,7 @@ class Details extends Component {
   
   static getDerivedStateFromProps(nextProps, prevState) {
     if (this.props !== undefined && this.props.date !== nextProps.date) {
-      this.props.fetchRoutes(props.date);
+      this.props.fetchRoutes(this.props.date);
       return null;
     }
 
