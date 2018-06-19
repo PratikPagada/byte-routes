@@ -1,18 +1,26 @@
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components';
+import { StatusBar, Platform } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 
-const Wrapper = styled.View`
-  position: absolute;
-  top: 24px;
-  left: 0;
-  right: 0;
-  zIndex: 900;
-  backgroundColor: #fff;
-  elevation: 2;
-  shadowColor: #e0e0e0;
-  shadowOffset: 0 2px;
-  shadowOpacity: 0.3;
-`;
+const Wrapper = Platform.OS === 'ios' ?
+  styled(SafeAreaView)`
+    position: absolute;
+    left: 0;
+    right: 0;
+    zIndex: 900;
+    backgroundColor: #fff;
+    elevation: 2;
+  ` :
+  styled.View`
+    position: absolute;
+    top: ${StatusBar.currentHeight || '24px'};
+    left: 0;
+    right: 0;
+    zIndex: 900;
+    backgroundColor: #fff;
+    elevation: 2;
+  `;
 
 const TitleWrapper = styled.Text`
   color: ${props => props.theme.primaryTextColor};

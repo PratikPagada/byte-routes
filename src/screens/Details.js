@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, ToolbarAndroid, Dimensions, StyleSheet } from 'react-native';
+import { View, ToolbarAndroid, Dimensions, StyleSheet, Platform } from 'react-native';
 import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import { MapView } from 'expo';
@@ -24,7 +24,7 @@ import {
 
 const ContentWrapper = styled.View`
   flex: 1;
-  paddingTop: 122px;
+  paddingTop: ${Platform.OS === 'ios' ? '98px' : '122px'};
 `;
 
 const Content = styled.View`
@@ -68,18 +68,21 @@ class Details extends Component {
   };
 
   _getMarkers = ({stops}) => {
-    return stops.map((stop) => {
-      return (
-        <MapView.Marker
-          key={stop.locationNo}    
-          coordinate={{
-            latitude: stop.latitude,
-            longitude: stop.longitude
-          }}
-          title={stop.locationName}
-        />
-      )
-    });
+    if (stops) {
+      return stops.map((stop) => {
+        return (
+          <MapView.Marker
+            key={stop.locationNo}    
+            coordinate={{
+              latitude: stop.latitude,
+              longitude: stop.longitude
+            }}
+            title={stop.locationName}
+          />
+        )
+      });
+    }
+    return null;
   }
 
   _getRoute = ({stops}) => {
@@ -96,6 +99,51 @@ class Details extends Component {
       });
     }
     return null;
+  };
+
+  // render the content inside scrollview
+  _renderContent = () => {
+    const {
+      fetchedRoutes,
+      fetchingRoutes,
+      error
+    } = this.props;
+
+    const {
+      route,
+    } = this.state;
+    
+    if (error) {
+      return (
+        <Empty>
+          <Circle error>
+            <Message>{error}</Message>
+          </Circle>
+        </Empty>
+      );
+    }
+
+    if (!fetchedRoutes || fetchingRoutes) {
+      return (
+        <Empty>
+          <LoadingIndicator />
+          <Message>Loading Route</Message>
+        </Empty>
+      );
+    }
+
+    if (fetchedRoutes) {
+      if (route.stops) {
+        return this._generateStops(route)
+      }
+      return (
+        <Empty>
+          <Circle>
+            <Message>No route for today</Message>
+          </Circle>
+        </Empty>
+      );
+    }
   };
 
   _renderView = () => {
@@ -116,77 +164,34 @@ class Details extends Component {
       stops,
     } = route;
 
-    if (error) {
-      return (
-        <Empty>
-          <Circle error>
-            <Message>{error}</Message>
-          </Circle>
-        </Empty>
-      );
-    }
-
-    if (!fetchedRoutes || fetchingRoutes) {
-      return (
-        <Empty>
-          <LoadingIndicator />
-          <Message>Loading Route</Message>
-        </Empty>
-      )
-    }
-
-    if (fetchedRoutes) {
-      return (
-        <ScrollView key="info">
-          {
-            route.stops &&
-            <MapContainer key="map">
-              <MapView
-                style={{
-                  ...StyleSheet.absoluteFillObject,
-                }}
-                initialRegion={{
-                  latitude: route.stops[0].latitude,
-                  longitude: route.stops[0].longitude,
-                  latitudeDelta: 0.0922,
-                  longitudeDelta: 0.0421,
-                }}
-              >
-                {this._getMarkers(route)}
-              </MapView>
-            </MapContainer>
-          }
-          <Content>
-            <RoutePager
-              stops={(stops ? stops.length : 0)}
-              duration={(duration || 0)}
-              distance={(distance || 0)}
-              onPress={this.handlePagerPress}
-              pressedArrow={this.handleDateChange}
-            />
-            {
-              route.stops &&
-              this._generateStops(route)
-            }
-            {
-              !route.stops &&
-                <Empty>
-                  <Circle>
-                    <Message>No route for today</Message>
-                  </Circle>
-                </Empty>
-            }
-          </Content>
-        </ScrollView>
-      );
-    }
-    
     return (
-      <Empty>
-        <Circle>
-          <Message>No route for today</Message>
-        </Circle>
-      </Empty>
+      <ScrollView key="info">
+        <MapContainer key="map">
+          <MapView
+            style={{
+              ...StyleSheet.absoluteFillObject,
+            }}
+            initialRegion={{
+              latitude: (route.stops && route.stops[0].latitude) || -122.4900207 /*currentLocation*/,
+              longitude: (route.stops && route.stops[0].longitude) || 37.9501647 /*currentLocation*/,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+          >
+            {this._getMarkers(route)}
+          </MapView>
+        </MapContainer>
+        <Content>
+          <RoutePager
+            stops={(stops ? stops.length : 0)}
+            duration={(duration || 0)}
+            distance={(distance || 0)}
+            onPress={this.handlePagerPress}
+            pressedArrow={this.handleDateChange}
+          />
+          {this._renderContent()}
+        </Content>
+      </ScrollView>
     );
   }
   

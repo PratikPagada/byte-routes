@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TouchableNativeFeedback, DatePickerAndroid } from 'react-native';
+import { TouchableOpacity, DatePickerAndroid } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components';
+import { Platform } from 'react-native'
 
 import Toolbar from '../components/Toolbar';
 import Datebar from '../components/Datebar';
@@ -22,7 +23,7 @@ import { padNumber } from '../utils';
 
 const ContentWrapper = styled.View`
   flex: 1;
-  paddingTop: 122px;
+  paddingTop: ${Platform.OS === 'ios' ? '98px' : '122px'};
 `;
 
 const Icon = styled(Ionicons).attrs({
@@ -174,15 +175,15 @@ class Home extends Component {
             />
           }
           rightContent={[
-            <TouchableNativeFeedback key="calendar" onPress={this._onCalendarPress}>
+            <TouchableOpacity key="calendar" onPress={this._onCalendarPress}>
               <Icon name={"md-calendar"} highlight={expandToolbar}/>
-            </TouchableNativeFeedback>,
-            <TouchableNativeFeedback key="search" onPress={this._onSearchPress}>
+            </TouchableOpacity>,
+            <TouchableOpacity key="search" onPress={this._onSearchPress}>
               <Icon name={"md-search"} />
-            </TouchableNativeFeedback>,
-            <TouchableNativeFeedback key="settings" onPress={this._onSettingsPress}>
+            </TouchableOpacity>,
+            <TouchableOpacity key="settings" onPress={this._onSettingsPress}>
               <Icon name={"md-settings"} />
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
           ]}
         >
           <Datebar

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { TouchableNativeFeedback, Linking, Platform } from 'react-native';
+import { TouchableHighlight, Linking, Platform } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import RouteLine from '../RouteLine';
 import {
@@ -44,7 +44,10 @@ class Stop extends Component {
     } = stop;
 
     return (
-      <TouchableNativeFeedback onPress={this._openStop}>
+      <TouchableHighlight
+        underlayColor={"#c6c6c6"}
+        onPress={this._openStop}
+      >
         <Wrapper minimal={minimal}>
           {
             !minimal &&
@@ -72,7 +75,7 @@ class Stop extends Component {
             <MaterialCommunityIcons name="chevron-right" size={minimal ? 18 : 24}/>
           </RightContent>
         </Wrapper>
-      </TouchableNativeFeedback>
+      </TouchableHighlight>
     );
   }
 }

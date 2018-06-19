@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled, { withTheme } from 'styled-components';
-import { TouchableNativeFeedback } from 'react-native';
+import { TouchableHighlight, TouchableOpacity } from 'react-native';
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import { Avatar } from '../index';
@@ -80,7 +80,7 @@ class DriverRoute extends Component {
 
     return (
       <Wrapper>
-        <TouchableNativeFeedback onPress={this._onCardPress}>
+        <TouchableHighlight onPress={this._onCardPress}>
           <CardWrapper open={open}>
             <Avatar /*source={avatar || defaultImage}*/ />
             <ContentWrapper>
@@ -109,13 +109,13 @@ class DriverRoute extends Component {
                 </Information>
               </QuickInfo>
             </ContentWrapper>
-            <TouchableNativeFeedback onPress={this._onDropDownPress}>
+            <TouchableOpacity onPress={this._onDropDownPress}>
               <ArrowWrapper>
                 <FontAwesome name={open ? 'angle-up' : 'angle-down'}  size={24} />
               </ArrowWrapper>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
           </CardWrapper>  
-        </TouchableNativeFeedback>
+        </TouchableHighlight>
         <StopWrapper>
           {
             open &&

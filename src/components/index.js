@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { SafeAreaView } from 'react-navigation';
 
-export const Wrapper = styled.View`
+export const Wrapper = styled(SafeAreaView).attrs({
+  forceInset: {
+    bottom: 'never',
+  }
+})`
   flex: 1;
 `;
 

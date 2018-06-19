@@ -23,7 +23,7 @@ export default class App extends React.Component {
       <Provider store={Store}>
         <ThemeProvider theme={theme}>
           <Root>
-            <StatusBar barStyle='light-content' backgroundColor='transparent' translucent animated/>
+            <StatusBar barStyle={`${Platform.OS === 'ios' ? 'dark' : 'light'}-content`} backgroundColor="transparent" translucent animated/>
             <Navigation />
           </Root>
         </ThemeProvider>

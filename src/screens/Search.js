@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { MaterialIcons } from '@expo/vector-icons';
-import { TouchableNativeFeedback } from 'react-native';
+import { TouchableOpacity, Platform } from 'react-native';
 import styled from 'styled-components';
 
 import { formatDate } from '../utils';
@@ -20,7 +20,7 @@ import {
 
 const ContentWrapper = styled.View`
   flex: 1;
-  paddingTop: 122px;
+  paddingTop: ${Platform.OS === 'ios' ? '98px' : '122px'};
 `;
 
 const SearchBar = styled.TextInput.attrs({
@@ -128,11 +128,11 @@ class Search extends Component {
             />
           }
           rightContent={
-            <TouchableNativeFeedback
+            <TouchableOpacity
               onPress={this._onClearPress}
             >
               <Icon name="clear" highlight={this.state.searchVal !== ''}/>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
           }
           showTitle={false}
           back

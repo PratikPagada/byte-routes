@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Platform } from 'react-native';
 import styled from 'styled-components';
 
 import Toolbar from '../components/Toolbar';
@@ -11,7 +12,7 @@ import {
 
 const ContentWrapper = styled.View`
   flex: 1;
-  paddingTop: 80px;
+  paddingTop: ${Platform.OS === 'ios' ? '56px' : '80px'};
 `;
 
 

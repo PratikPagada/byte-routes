@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { formatTime } from '../../utils';
 import {
@@ -32,9 +32,9 @@ class RoutePager extends Component {
     return (
       <TouchableWithoutFeedback onPress={onPress}>
         <Wrapper>
-          <TouchableNativeFeedback onPress={this._onLeftPress}>
+          <TouchableOpacity onPress={this._onLeftPress}>
             <MaterialIcons name="keyboard-arrow-left" size={24} />
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
           <ContentCenter>
             <ContentSection>
               <Icon name="md-car" size={24} color="#6f9df3" />
@@ -53,9 +53,9 @@ class RoutePager extends Component {
               </Text>
             </ContentSection>
           </ContentCenter>
-          <TouchableNativeFeedback onPress={this._onRightPress}>
+          <TouchableOpacity onPress={this._onRightPress}>
             <MaterialIcons name="keyboard-arrow-right" size={24}/>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </Wrapper>
       </TouchableWithoutFeedback>
     );

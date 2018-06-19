@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableNativeFeedback } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import {
   Icon,
@@ -34,9 +34,9 @@ class Toolbar extends Component {
           <LeftContent>
             {
               back &&
-              <TouchableNativeFeedback onPress={this.onBackPress}>
+              <TouchableOpacity onPress={this.onBackPress}>
                 <Icon name="md-arrow-back" size={24} />
-              </TouchableNativeFeedback>
+              </TouchableOpacity>
             }
             {leftContent}
           </LeftContent>
