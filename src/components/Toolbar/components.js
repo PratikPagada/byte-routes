@@ -26,13 +26,13 @@ const TitleWrapper = styled.Text`
   color: ${props => props.theme.primaryTextColor};
   fontSize: 20px;
   textAlign: left;
-  paddingLeft: 8px;
+  marginLeft: 16px;
 `;
 
 const Bar = styled.View`
   display: flex;
   flex-direction: row;
-  padding: 16px;
+  padding: 16px 0px;
   height: 56px;
 `;
 
@@ -58,7 +58,7 @@ const Icon = styled(Ionicons).attrs({
   size: 24,
 })`
   color: ${props => props.highlight ? props.theme.primary : props.theme.primaryTextColor};
-  paddingRight: 16px;
+  padding: 0px 0px 0px 16px;
 `;
 
 

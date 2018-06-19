@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TouchableOpacity, DatePickerAndroid } from 'react-native';
@@ -29,7 +29,7 @@ const ContentWrapper = styled.View`
 const Icon = styled(Ionicons).attrs({
   size: 24,
 })`
-  marginLeft: 24px;
+  padding: 0px 12px;
   color: ${props => props.highlight ? props.theme.primary : props.theme.primaryTextColor};
 `;
 
@@ -178,17 +178,19 @@ class Home extends Component {
               onDateChange={this.handleDateChange}
             />
           }
-          rightContent={[
-            <TouchableOpacity key="calendar" onPress={this._onCalendarPress}>
-              <Icon name={"md-calendar"} highlight={expandToolbar}/>
-            </TouchableOpacity>,
-            <TouchableOpacity key="search" onPress={this._onSearchPress}>
-              <Icon name={"md-search"} />
-            </TouchableOpacity>,
-            <TouchableOpacity key="settings" onPress={this._onSettingsPress}>
-              <Icon name={"md-settings"} />
-            </TouchableOpacity>
-          ]}
+          rightContent={
+            <Fragment>
+              <TouchableOpacity key="calendar" onPress={this._onCalendarPress}>
+                <Icon name={"md-calendar"} highlight={expandToolbar}/>
+              </TouchableOpacity>
+              <TouchableOpacity key="search" onPress={this._onSearchPress}>
+                <Icon name={"md-search"} />
+              </TouchableOpacity>
+              <TouchableOpacity key="settings" onPress={this._onSettingsPress}>
+                <Icon name={"md-settings"} />
+              </TouchableOpacity>
+            </Fragment>
+          }
         >
           <Datebar
             date={this.props.date}

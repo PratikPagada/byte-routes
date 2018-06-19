@@ -47,8 +47,7 @@ class RoutePager extends Component {
               <VerticalSection>
                 <Text>{stops} stops</Text>
                 {
-                  duration &&
-                  <Text>{formatTime(duration)}</Text>  
+                  (duration !== undefined) && <Text>{formatTime(duration)}</Text>  
                 }
               </VerticalSection>
             </ContentSection>

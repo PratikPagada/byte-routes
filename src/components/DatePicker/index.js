@@ -41,7 +41,7 @@ class DatePicker extends Component {
           onDayPress={this.handleDateChange}
           // Calendar Theme
           theme={{
-            calendarBackground: '#f0f0f0',
+            calendarBackground: '#fff',
             textSectionTitleColor: '#b6c1cd',
             selectedDayBackgroundColor: this.props.theme.primary,
             selectedDayTextColor: '#ffffff',

@@ -29,12 +29,13 @@ const SearchBar = styled.TextInput.attrs({
 })`
   flex: 1;
   fontSize: 20px;
+  marginLeft: 16px;
 `;
 
 const Icon = styled(MaterialIcons).attrs({
   size: 24,
 })`
-  paddingLeft: 24px;
+  padding: 0px 16px;
   color: ${props => props.highlight ? props.theme.error : props.theme.primaryTextColor};
 `;
 
