@@ -51,10 +51,15 @@ class Home extends Component {
       this.props.fetchRoutes(this.props.date);
     }
   }
-
+/*
   handleDateChange = (year, month, day) => {
     // format to -> 2018-06-01
     this.props.changeDate(`${year}-${padNumber(month)}-${padNumber(day)}`);
+  };
+*/
+  handleDateChange = (date) => {
+    this.props.changeDate(date);
+    this._onCalendarPress();
   };
 
   _generateRoutes = (routes = []) => {
@@ -97,10 +102,9 @@ class Home extends Component {
   };
 
   _onCalendarPress = () => {
-    /*this.setState({
-      expandToolbar: !this.state.expandToolbar,
-    });*/
-    this._openDefaultCalendar();
+    this.setState({
+      expandToolbar: !this.state.expandToolbar
+    });
   };
 
   _onSearchPress = () => {

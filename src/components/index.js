@@ -22,7 +22,7 @@ export const Circle = styled.View`
   flex: 1;
   width: 100%;
   border-radius: 150px;
-  background-color: ${props => props.error ? props.theme.error : '#BDBDBD'};
+  background-color: ${props => props.error ? props.theme.error : '#C5E1A5'};
   display: flex;
   justifyContent: center;
   alignItems: center;

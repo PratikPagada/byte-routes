@@ -55,9 +55,9 @@ class Details extends Component {
     let next = getDate(this.props.date);
     // add or subtract one day depending on whether
     // the right or left arrow was pressed in the route pager
-    console.log(next);
+    //console.log(next);
     next.setDate(next.getDate() + (right ? 1 : -1));
-    console.log(next);
+    //console.log(next);
 
     // change the date
     this._changeDate(next.getFullYear(), next.getMonth() + 1, next.getDate());

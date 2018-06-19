@@ -8,13 +8,13 @@ export const CHANGE_DATE = 'CHANGE_DATE';
 
 export function fetchRoutes(date) {
   return (dispatch) => {
-    console.log("FETCHIN ROUTES");
+    //console.log("FETCHIN ROUTES");
     dispatch({type: FETCH_ROUTES});
     fetch(`${api}&date=${date}`)
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson.success) {
-          console.log("FETCHED ROUTES");
+          //console.log("FETCHED ROUTES");
           dispatch({
             type: FETCH_ROUTES_SUCCESS,
             payload: {
@@ -22,7 +22,7 @@ export function fetchRoutes(date) {
             }
           });
         } else {
-          console.log("FETCHED ROUTES FAIL");
+          //console.log("FETCHED ROUTES FAIL");
           dispatch({
             type: FETCH_ROUTES_FAILURE,
             payload: {

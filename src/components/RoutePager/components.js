@@ -27,8 +27,14 @@ const ContentSection = styled.View `
   flex-direction: row;
 `;
 
+const VerticalSection = styled.View`
+  display: flex;
+  flex-direction: column;
+  justifyContent: center;
+`;
+
 const Text = styled.Text `
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const Icon = styled(Ionicons).attrs({
@@ -38,18 +44,11 @@ const Icon = styled(Ionicons).attrs({
   paddingRight: 8px;
 `;
 
-const MIcon = styled(MaterialCommunityIcons).attrs({
-  size: 24,
-})`
-  color: ${props => (props.color || props.theme.primaryTextColor)};
-  paddingRight: 8px;
-`;
-
 export {
-  MIcon,
   Icon,
   Text,
   ContentSection,
   ContentCenter,
+  VerticalSection,
   Wrapper,
 };

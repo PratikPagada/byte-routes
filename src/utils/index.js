@@ -18,7 +18,7 @@ export const formatDate = (dateStr) => {
 export const formatTime = (time) => {
   minutes = time % 60;
   hours = Math.floor(time / 60)
-  return `${hours > 0 ? `${hours}hr` : ''}${minutes}min`;
+  return `${hours > 0 ? `${hours}hr` : ''}${minutes > 0 ? `${minutes}min`: ''}`;
 };
 
 // returns a javascript date object from year-month-day format
